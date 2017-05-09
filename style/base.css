@@ -289,7 +289,8 @@ li {
 @media screen and (min-width: 330px) and (max-width: 480px) {
 
     .center {
-        width: 90vw;
+        width: 80vw;
+        height: 80vh;
 
     }
 
