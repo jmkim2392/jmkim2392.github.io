@@ -30,9 +30,8 @@ nav {
 #container {
     margin: 20px;
     background-color: #00CC58;
-    padding: 10px;
     max-width: 100%;
-    padding-bottom: 30px;
+    padding: 10px 10px 30px;
 
 }
 
@@ -289,6 +288,10 @@ li {
 
 @media screen and (min-width: 330px) and (max-width: 480px) {
 
+    .center {
+        width: 90vw;
+
+    }
 
 
 }
