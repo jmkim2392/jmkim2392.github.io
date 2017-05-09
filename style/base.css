@@ -286,11 +286,10 @@ li {
 
 /* mobile responsive CSS */
 
-@media screen and (min-width: 330px) and (max-width: 480px) {
+@media screen and (min-width: 330px) and (max-width: 500px) {
 
     .center {
-        width: 30vw;
-        height: 100vh;
+        width: 400px;
 
     }
 
