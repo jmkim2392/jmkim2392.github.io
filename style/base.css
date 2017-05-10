@@ -34,10 +34,16 @@ nav {
 
 #container {
     margin: 20px;
+<<<<<<< HEAD
 
     background-color: #5CBF74;
     max-width: 100%;
     padding: 10px 10px 30px;
+=======
+    background-color: #00CC58;
+    /*max-width: 100%;*/
+    /*padding: 10px 10px 30px;*/
+>>>>>>> 2580a20f93af58a488117b6fa5b500b29c04a2e8
 
 }
 
@@ -298,6 +304,7 @@ li {
 
 @media screen and (min-width: 330px) and (max-width: 500px) {
 
+<<<<<<< HEAD
 
     .center {
 
@@ -315,4 +322,10 @@ li {
     .slideout-menu {
 
     }
+=======
+    #panel {
+        background-color: lightgreen;
+
+    }
+>>>>>>> 2580a20f93af58a488117b6fa5b500b29c04a2e8
 }
