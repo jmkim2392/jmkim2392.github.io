@@ -10,34 +10,76 @@ body {
     padding: 0px;
 }
 
-nav {
-    background-color: #5CBF74;
+/* top nav header */
 
+.topNav {
+    background-color: #386324;
+    height: 70px;
 }
 
-#navTitle {
-    color: white;
-    padding: 7px;
+.menuButton {
+    width:70px;
+    height:70px;
+    display: block; 
+    
+}
+.menuButton img {
+     width: 40px;
+    position: relative;
+    top: -2px;
+}
+.menuTitle {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+    top: -65px;
+       color: white;
+    
     text-align: center;
+}
+.menuRight {
+    width:200px;
+    height:70px;
+    position:relative;
+    float:right;
+    top:-126px;
+}
+.menuRight img {
+ height: 55px;
+    position: relative;
+    top:4px;
+    
+}
+
+
+.topNav button {
+    background: none;
+    border: none;
+    width:100%;
+    height: 100%;
 
 }
+
 
 .icon {
     width: 90%;
-
 }
 
 #container {
     margin: 20px;
-    background-color: #00CC58;
-    /*max-width: 100%;*/
-    /*padding: 10px 10px 30px;*/
+    background-color: #f8f8f8;
+    max-width: 100%;
+    padding: 10px 10px 30px;
+     box-shadow: 0 4px 8px 0 #7597b3, 0 6px 20px 0 #7597b3;
+    border-radius: 5px;
+    
+
 
 }
 
 .col {
     text-align: center;
-
 }
 
 .row {
@@ -46,23 +88,23 @@ nav {
 }
 
 #quickTip {
-    background-color: #197F53;
+    background-color:  #386324;
+    
     margin: 30px;
     color: white;
     padding: 5px;
-
     border-radius: 10px;
-
 }
 
+
 /** Animation to grow card on hover **/
+
 .hvr-grow {
     display: inline-block;
     vertical-align: middle;
     transform: translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
     backface-visibility: hidden;
-
     transition-duration: 0.3s;
     transition-property: transform;
 }
@@ -73,18 +115,44 @@ nav {
     transform: scale(1.07);
 }
 
+
 /* Index Styles */
+
 #panel {
-    background-color: #f0f0f0;
+
+    background-color: #e0e7ef;
+
+    height: 100%;
 }
 
+.circle {
+    /* make it responsive */
+    max-width: 100%;
+    display:block;
+    height: 150px;
+    width:150px;
+    background-color:white;
+    border-radius:50%;
+    box-shadow: 0px 1px 10px -10px #e0e7ef, 1px 2px 20px 0px #e0e7ef;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+.circle img {
+    position: relative;
+    top: 30px;
+
+}
+
+
+
 /** Lists **/
+
 .back {
     display: inline !important;
     color: white;
     float: left;
     padding-top: 5px;
-
 }
 
 #newList {
@@ -93,26 +161,38 @@ nav {
     color: white;
     padding: 5px;
     text-align: center;
-
     border-radius: 10px;
 }
 
 .btn-success {
     background-color: green;
-    width: 80%;
+    width: 40%;
+    max-width: 50%;
+}
+
+.btn-warning {
+    max-width: 15%;
+    min-width: 30%;
+    width: 30%;
 }
 
 .btn-danger {
-    width: 15%
+    max-width: 30%;
+    min-width: 30%;
+}
+
+#buttons {
+    margin-bottom: 8px;
+    float:right;
+    margin-right:23px;
 }
 
 #addAnItem {
     width: 100%;
     margin-bottom: 20px;
-    background-color: #197F53;
+    background-color: #9ECaa9;
     text-align: center;
     max-width: 90%;
-
 }
 
 #center {
@@ -122,22 +202,31 @@ nav {
 #addAnItem::placeholder {
     text-align: center;
 }
+#removeList{
+    color:black;
+    margin-bottom:10px;
+}
+#selectAll{
+    color:black;
+}
+#right{
+    float:right;
+}
 
 #listItem {
-
-    background-color: white;
+    background-color: #e0e7ef;
     color: black;
     list-style-type: none;
     margin: 1px;
-    width: 100%;
-    font-size: 140%;
+    width: 95%;
+    font-size: 120%;
     padding-left: 20px;
+    padding-right:20px;
 }
 
 .plus {
     float: left;
     padding-left: 10px;
-
 }
 
 .checkAll {
@@ -145,33 +234,50 @@ nav {
     margin-bottom: 10px;
 }
 
+a:hover {
+    text-decoration: none !important;
+    color: white;
+}
+
+a:active {
+    text-decoration: none !important;
+    color: white;
+}
+
+a:visited {
+    text-decoration: none !important;
+    color: white;
+}
+
 [v-cloak] {
     display: none;
 }
 
+
 /** Info **/
+
 #info {
-    background-color: #197F53;
+    background-color: #386324;
     text-align: center;
     color: white;
     padding: 5px;
     margin: 1px;
     border: 1px solid white;
-
+    clear:both;
 }
 
 #infoText {
-    color: white;
+    color: black;;
     margin-top: 10px;
-    margin-bottom: 10px;;
-
+    margin-bottom: 10px;
+    ;
 }
 
-li {
+li {}
 
-}
 
 /* Slideout Menu */
+
 .slideout-menu {
     position: fixed;
     top: 0;
@@ -183,6 +289,7 @@ li {
     /*-webkit-overflow-scrolling: touch;*/
     z-index: 0;
     display: none;
+    background-color:#386324;
 }
 
 .slideout-menu-left {
@@ -197,7 +304,8 @@ li {
     position: relative;
     z-index: 1;
     will-change: transform;
-    background-color: #FFF; /* A background-color is required */
+    background-color: #FFF;
+    /* A background-color is required */
     min-height: 100vh;
 }
 
@@ -212,7 +320,6 @@ li {
 }
 
 .menuIcon {
-
     height: 50px;
 }
 
@@ -236,36 +343,17 @@ li {
 .menuVertical hr {
     border: 0;
     height: 2px;
-    background-image: -webkit-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
-    background-image: -moz-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
-    background-image: -ms-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
-    background-image: -o-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
+    background-image: -webkit-linear-gradient(left, #386324, #f0f0f0, #386324);
+    background-image: -moz-linear-gradient(left, #386324, #f0f0f0, #386324);
+    background-image: -ms-linear-gradient(left, #386324, #f0f0f0, #386324);
+    background-image: -o-linear-gradient(left, #386324, #f0f0f0, #386324);
     position: relative;
-    left: -50px;
-    width: 356px;
+    left: -40px;
+    width: 300px;
 }
 
 .menuLinks {
     display: block;
-}
-
-.topNav {
-    background-color: #f0f0f0;
-    height: 70px;
-}
-
-.topNav img {
-    width: 50px;
-    position: relative;
-    top: 15px;
-    left: 10px;
-
-
-}
-
-.topNav button {
-    background: none;
-    border: none;
 }
 
 #fridgeIcon {
@@ -284,12 +372,17 @@ li {
     margin-left: 10px;
 }
 
+
 /* mobile responsive CSS */
 
 @media screen and (min-width: 330px) and (max-width: 500px) {
 
-    #panel {
-        background-color: lightgreen;
+    #container {
+        width: 90vw;
+       height: 70vh;
+    margin-left: auto;
+        margin-right: auto;
 
     }
 }
+
