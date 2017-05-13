@@ -1,22 +1,31 @@
-
-
 <!DOCTYPE html>
+
+
 <html>
+
 <head>
-	<title>Waste Watcher | Info</title>
-	<!-- Bootstrap 4 alpha CSS -->
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Custom Fonts -->
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
-	<link href="style/base.css" rel="stylesheet" type="text/css">
-	<meta charset="utf-8">
+    <title>VegiSmart | Info</title>
+    <!-- Bootstrap 4 alpha CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
+    <!--Style Sheets -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link href="style/base.css" rel="stylesheet" type="text/css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
-      <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
-</head>
+    <!-- Fav Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
+
 <body>
- <!-- Slideout menu -->
+    <!-- Slideout menu -->
     <nav id="menu">
         <header>
             <ul class="menuVertical">
@@ -67,11 +76,12 @@
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-info-circle" aria-hidden="true"></i> Info & Tips</h1> </div>
+                    <h1 id="navTitle"><i class="fa fa-info-circle" aria-hidden="true"></i> Info & Tips</h1>
+                </div>
             </div>
         </header>
 <div id="container">
-    
+    <div class="contentWrap">
 <div id="accordion">
     
           <h2 id="info">Tips</h2>
@@ -125,22 +135,41 @@ Canning is a great way to preserve food (especially fruit) and increase its shel
     
         <h2 id="info">About</h2>
   <div id="infoText">
-   <p> We are a group of five students of BCIT that are commited to reducing food waste. We developed this app for a project course. If you have any suggestions or comments please email us at waste23@gmail.com</p>
+      <p> We are a group of five students of BCIT that are commited to reducing food waste. We developed this app for a project course. If you have any suggestions or comments please email us at 
+          <a id="mailto" href="mailto:waste23@gmail.com">waste23@gmail.com</a></p>
     </div>
     
       <h2 id="info">Affiliated Apps</h2>
   <div id="infoText">
  <ul id="light-sliderApps">
       <li> 
-          <img src="http://placehold.it/50x50" style=float:left>Fub3r is an app to help you find recipes by ingredient. Enter 2 or more recipes and be given hundreds of recipes to explore</li>
-         <li> <img src="http://placehold.it/50x50" style=float:left>Take2</li>
+          <img src="images/take2-logo-1_1024.png" class="affiliated">Take 2 is an app to help you find recipes by ingredient. Enter 2 or more recipes and be given hundreds of recipes to explore
+     <br><br>
+     <a href="#">www.take2.ca</a></li>
+         <li > <img src="images/logo6.png" class="affiliated" >Freshness provides you with food preservation methods for you to keep your food fresh as long as possible.
+     <br><br>
+             <a href="#">https://freshness.com</a></li>
+     <li >
+     <img src="images/overcooked-logo.svg" class="affiliated" style="width:80px"> Overcooked is an app for businesses, farmers, grocery stores, or anyone to post their surplus of foods to help connect to charities and hungry mouths.
+     <br><br>
+     <a href="https://overcooked.ca/">https://overcooked.ca/</a>
+     </li>
+     
+     <li >
+     <img src="images/food-fall-artwork-1.jpg" class="affiliated" style="width:80px"> Tired of managing your food? Try Food Fall! A web based game that makes learning about food waste fun.
+     <br><br>
+     <a href="http://foodfall.ca/">http://foodfall.ca/</a>
+     </li>
       </ul>
     </div>
     
     
     </div></div>
     
- 
+        </div>
+    </main>
+    </body>
+
     
     
 
@@ -252,5 +281,4 @@ $(function () {
         slideout.toggle();
     });
 </script>
-
 

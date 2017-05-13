@@ -39,7 +39,7 @@ body {
     text-align: center;
 }
 .menuRight {
-    width:200px;
+    width:100px;
     height:70px;
     position:relative;
     float:right;
@@ -273,7 +273,10 @@ a:visited {
     ;
 }
 
-li {}
+.affiliated{
+    
+    float:left;
+}
 
 
 /* Slideout Menu */
@@ -375,14 +378,52 @@ li {}
 
 /* mobile responsive CSS */
 
-@media screen and (min-width: 330px) and (max-width: 500px) {
+@media screen and (min-width: 400px) and (max-width: 500px) {
 
     #container {
         width: 90vw;
-       height: 70vh;
     margin-left: auto;
         margin-right: auto;
-
+        display:block;
+  
     }
+    .contentWrap {
+     
+    }
+    .circle {
+    /* make it responsive */
+    max-width: 100%;
+    display:block;
+    height: 100px;
+    width:100px;
+    background-color:white;
+    border-radius:50%;
+    box-shadow: 0px 1px 10px -10px #e0e7ef, 1px 2px 20px 0px #e0e7ef;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
 }
-
+.circle .size1 {
+    position: relative;
+    top: 25px;
+    width:55px;
+}
+.circle .size2 {
+    position: relative;
+    top: 25px;
+    height:55px;
+    width:15px;
+}
+.circle .size3 {
+    position: relative;
+    top: 20px;
+    height:60px;
+    width:50px;
+}
+  .circle .size4 {
+    position: relative;
+    top: 20px;
+    height:60px;
+    width:35px;
+}
+}
