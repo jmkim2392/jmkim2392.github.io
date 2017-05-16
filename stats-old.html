@@ -2,27 +2,17 @@
 <html>
 
 <head>
-    <title>Vegi Smart</title>
+    <title>Waste Watcher</title>
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
-    <!-- Style Sheets-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
-    <link href="style/login.css" rel="stylesheet" type="text/css">
-
+    <link href="style/stat1.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Fav Icons-->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="manifest.json">
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
 
 <body>
     <!-- Slideout menu -->
@@ -55,7 +45,7 @@
                 <hr>
                 <div class="menuLinks">
                     <a href="info.html">
-                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info &amp; Tips</span> </li>
+                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span> </li>
                     </a>
                 </div>
                 <hr>
@@ -76,46 +66,55 @@
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</h1>
-                </div>
+                    <h1 id="navTitle"><i class="fa fa-line-chart" aria-hidden="true"></i> My Stats</h1> </div>
             </div>
         </header>
-        <div class="container-fluid">
-            <div id="container">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div id="content"> <img src="images/Icon%20Assets/logo5Shadowxhdpi.png" alt="Logo" id="logo">
-                            <div id="message"></div>
-                                <input type="text" id="displayname" class="textinput" name="DisplayName" placeholder="Display Name" required>
-                                <br>
-                                <input type="email" id="username" class="textinput" name="Username" placeholder="Email" required>
-                                <br>
-                                <input type="password" id="password" class="textinput" name="Password" placeholder="Password" required>
-                                <br>
-                                <input type="password" id="passwordconfirm" class="textinput" name="PasswordConfirm" placeholder="Confirm Password" required>
-                                <br>
-                                <input type="button" value="Register" onclick="signUp()"> </form>
-                        </div>
+        <div id="container">
+            <div class="row">
+                <div class="col-xs-7 col">
+                    <div class="card"> You have saved
+                        <br> <img id="dollarSign" src="images/dollarsign.png" alt="Dollar Sign"> <span class="bigText" id="savings" onclick="savingsChange()">233</span>
+                        <br>in total. </div>
+                </div>
+                <div class="col-xs-5 col">
+                    <div class="row">
+                        <div class="card">
+                            <br>
+                            <br> </div>
                     </div>
+                    <div class="row">
+                        <div class="card"> <img id="cartIcon" src="images/shoppingcart.png" alt="Shopping Cart"> <span class="smallText">&nbsp;4 trips</span> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col">
+                    <div class="card"> Top 5 wasted food
+                        <br>
+                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
+                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
+                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
+                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
+                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col">
+                    <div class="card"> <span class="smallText">Saving per week</span>
+                        <br> <img id="smallDollarSign" src="images/dollarsign.png" alt="Dollar Sign"> <span class="mediumText">30</span> </div>
+                    <div class="card"> <span class="smallText">Waste per week</span>
+                        <br> <img id="smallDollarSign" src="images/dollarsign.png" alt="Dollar Sign"> <span class="mediumText">5</span> </div>
+                </div>
+                <div class="col-xs-6 col">
+                    <div class="card"> You have wasted
+                        <br> <img id="dollarSign" src="images/dollarsign.png" alt="Dollar Sign"> <span class="bigText">36</span>
+                        <br>in total. </div>
                 </div>
             </div>
         </div>
     </main>
 </body>
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
-    authDomain: "vegismart-9265b.firebaseapp.com",
-    databaseURL: "https://vegismart-9265b.firebaseio.com",
-    projectId: "vegismart-9265b",
-    storageBucket: "vegismart-9265b.appspot.com",
-    messagingSenderId: "37856046364"
-  };
-  firebase.initializeApp(config);
-</script>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
 <!-- Tether -->
@@ -126,55 +125,24 @@
 <!-- Initialize Bootstrap functionality -->
 <script>
     // Initialize tooltip component
-    $(function() {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    // Initialize popover component
-    $(function() {
+    $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        // Initialize popover component
+    $(function () {
         $('[data-toggle="popover"]').popover()
     })
-
 </script>
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
     var slideout = new Slideout({
-        'panel': document.getElementById('panel'),
-        'menu': document.getElementById('menu'),
-        'padding': 300,
-        'tolerance': 70
+        'panel': document.getElementById('panel')
+        , 'menu': document.getElementById('menu')
+        , 'padding': 300
+        , 'tolerance': 70
     });
-    document.querySelector('.toggle-button').addEventListener('click', function() {
+    document.querySelector('.toggle-button').addEventListener('click', function () {
         slideout.toggle();
     });
-
-</script>
-<script>
-	//Redirect to index if already logged in
-	firebase.auth().onAuthStateChanged(function(user) {
-	if(user) {
-		window.location.replace("index.html");
-	}
-		
-	function signUp() {
-		var email = $('#username').val();
-		var password = $('#password').val();
-		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			$('#message').html(errorMessage);
-		});
-		
-		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			$('#message').html(errorMessage);
-		});
-		
-		firebase.auth().onAuthStateChanged(function(user) {
-		if(user) {
-			window.location.replace("index.html");
-		}
-	});
-	}
 </script>

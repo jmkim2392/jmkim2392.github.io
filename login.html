@@ -2,17 +2,26 @@
 <html>
 
 <head>
-    <title>Waste Watcher</title>
+    <title>VegiSmart | Login</title>
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <link href="style/login.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Fav Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff"></head>
 
 <body>
     <!-- Slideout menu -->
@@ -66,21 +75,20 @@
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> Login</h1> </div>
+                    <h1 id="navTitle"><i class="fa fa-user-o" aria-hidden="true"></i> Login</h1> </div>
             </div>
         </header>
         <div class="container-fluid">
             <div id="container">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div id="content"> <img src="images/Asset2.png" alt="Logo" id="logo">
+                        <div id="content"> <img src="images/Icon%20Assets/logo5Shadowxhdpi.png" alt="Logo" id="logo">
                             <div id="message"></div>
-                            <form id="login" action="login.php" method="post">
                                 <input type="text" id="username" class="textinput" name="Username" placeholder="Email" required>
                                 <br>
                                 <input type="password" id="password" class="textinput" name="Password" placeholder="Password" required>
                                 <br>
-                                <input type="submit" value="Login"> </form>
+                                <input class="button" type="submit" value="Login" onclick="login()">
                         </div>
                     </div>
                 </div>
@@ -88,6 +96,19 @@
         </div>
     </main>
 </body>
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
+    authDomain: "vegismart-9265b.firebaseapp.com",
+    databaseURL: "https://vegismart-9265b.firebaseio.com",
+    projectId: "vegismart-9265b",
+    storageBucket: "vegismart-9265b.appspot.com",
+    messagingSenderId: "37856046364"
+  };
+  firebase.initializeApp(config);
+</script>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
 <!-- Tether -->
@@ -120,29 +141,19 @@
     });
 </script>
 <script>
-    $(document).ready(function () {
-        $("form").submit(function (event) {
-            var formData = {
-                Username: $("#username").val()
-                , Password: $("#password").val()
-            };
-            $.ajax({
-                type: "POST"
-                , url: "login.php"
-                , data: formData
-                , dataType: 'json'
-                , encode: true
-            }).done(function (data) {
-                if (data['success'] == false) {
-                    $("#message").html("Email or password is incorrect!");
-                    console.log(data);
-                }
-                else {
-                    $("#message").html("");
-                    window.location.replace("index.html");
-                }
-            });
-            event.preventDefault();
-        });
-    });
+	function login() {
+		var email = $('#username').val();
+		var password = $('#password').val();
+		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			$('#message').html(errorMessage);
+		});
+		
+		firebase.auth().onAuthStateChanged(function(user) {
+		if(user) {
+			window.location.replace("index.html");
+		}
+	});
+	}
 </script>
