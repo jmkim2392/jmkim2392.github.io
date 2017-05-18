@@ -28,7 +28,7 @@
     <nav id="menu">
         <header>
             <ul class="menuVertical">
-                <div id="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
+                <div class="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
                 <div class="menuLinks">
                     <a href="index.html">
                         <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
@@ -131,22 +131,6 @@
         </div>
     </main>
 </body>
-    <!-- slideout menu component -->
-<script src="dist/slideout.min.js"></script>
-<script>
-    var element = document.getElementById('menuHeader'),
-    style = window.getComputedStyle(element),
-    size = style.getPropertyValue('width');
-    var slideout = new Slideout({
-        'panel': document.getElementById('panel')
-        , 'menu': document.getElementById('menu')
-        , 'padding': size
-        , 'tolerance': 70
-    });
-    document.querySelector('.toggle-button').addEventListener('click', function () {
-        slideout.toggle();
-    });
-</script>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
 <!-- Tether -->
@@ -300,96 +284,108 @@
         $('[data-toggle="popover"]').popover()
     })
 </script>
-
+<!-- slideout menu component -->
+<script src="dist/slideout.min.js"></script>
+<script>
+    var slideout = new Slideout({
+        'panel': document.getElementById('panel')
+        , 'menu': document.getElementById('menu')
+        , 'padding': 300
+        , 'tolerance': 70
+    });
+    document.querySelector('.toggle-button').addEventListener('click', function () {
+        slideout.toggle();
+    });
+</script>
 <!-- Chart component -->
 <script src="https://unpkg.com/vue-chartjs@2.6.0/dist/vue-chartjs.full.min.js"></script>
 <script>
     function initCharts() {
-    <!-- lineChart -->
-    Vue.component('line-chart', {
-        extends: VueChartJs.Line
-        , mounted() {
-            this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
-            this.gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)')
-            this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
-            this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
-            this.renderChart({
-                //need to make reactive, show only last 3-4months?
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
-                , datasets: [
-                    {
-                        label: 'UserName', //need to make reactive
-                        pointBackgroundColor: 'white'
-                        , borderWidth: 1
-                        , pointBorderColor: 'white'
-                        , backgroundColor: this.gradient
-                        , data: [40, 39, 10, 40, 39, 80, 40] //need to make reactive
+        <!-- lineChart -->
+        Vue.component('line-chart', {
+            extends: VueChartJs.Line
+            , mounted() {
+                this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
+                this.gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)')
+                this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
+                this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+                this.renderChart({
+                    //need to make reactive, show only last 3-4months?
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+                    , datasets: [
+                        {
+                            label: 'UserName', //need to make reactive
+                            pointBackgroundColor: 'white'
+                            , borderWidth: 1
+                            , pointBorderColor: 'white'
+                            , backgroundColor: this.gradient
+                            , data: [40, 39, 10, 40, 39, 80, 40] //need to make reactive
         }
       ]
-            }, {
-                responsive: true
-                , maintainAspectRatio: true
-            })
-        }
-    })
-    Vue.component('radar-chart', {
-        extends: VueChartJs.Radar
-        , mounted() {
-            this.renderChart({
-                labels: ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7']
-                , datasets: [
-                    {
-                        label: 'UserName', //need to make reactive
-                        backgroundColor: '#386324'
-                        , data: [0, 20, 100] // need to make reactive
-        }
-      ]
-            }, {
-                responsive: true
-                , maintainAspectRatio: true
-            })
-        }
-    })
-    var numConsumed = consumed;
-    var numWasted = 100 - numConsumed;
-    Vue.component('doughnut-chart', {
-        extends: VueChartJs.Doughnut
-        , mounted() {
-            this.renderChart({
-                labels: ['Consumed', '']
-                , datasets: [
-                    {
-                        label: 'UserName'
-                        , backgroundColor: ['#386324', '#FFFFFF']
-                        , data: [numConsumed, numWasted] //need to make reactive
-                            
-                        , cutoutPercentage: '90'
-                        , borderColor: ['#386324', 'white']
+                }, {
+                    responsive: true
+                    , maintainAspectRatio: false
+                })
+            }
+        })
+        Vue.component('radar-chart', {
+            extends: VueChartJs.Radar
+            , mounted() {
+                this.renderChart({
+                    labels: ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7']
+                    , datasets: [
+                        {
+                            label: 'UserName', //need to make reactive
+                            backgroundColor: '#386324'
+                            , data: [0, 20, 100] // need to make reactive
         }
       ]
-            }, {
-                responsive: true
-                , maintainAspectRatio: false
-            })
+                }, {
+                    responsive: true
+                    , maintainAspectRatio: false
+                })
+            }
+        })
+        var numConsumed = consumed;
+        var numWasted = 100 - numConsumed;
+        Vue.component('doughnut-chart', {
+            extends: VueChartJs.Doughnut
+            , mounted() {
+                this.renderChart({
+                    labels: ['Consumed', '']
+                    , datasets: [
+                        {
+                            label: 'UserName'
+                            , backgroundColor: ['#386324', '#FFFFFF']
+                            , data: [numConsumed, numWasted] //need to make reactive
+                                
+                            , cutoutPercentage: '90'
+                            , borderColor: ['#386324', 'white']
         }
-    })
-    var vm = new Vue({
-        el: '.lineChart'
-        , data: {
-            message: ''
-        }
-    })
-    var vm = new Vue({
-        el: '.radarChart'
-        , data: {
-            message: ''
-        }
-    })
-    var vm = new Vue({
-        el: '.doughnutChart'
-        , data: {
-            message: ''
-        }
-    })
+      ]
+                }, {
+                    responsive: true
+                    , maintainAspectRatio: false
+                })
+            }
+        })
+        var vm = new Vue({
+            el: '.lineChart'
+            , data: {
+                message: ''
+            }
+        })
+        var vm = new Vue({
+            el: '.radarChart'
+            , data: {
+                message: ''
+            }
+        })
+        var vm = new Vue({
+            el: '.doughnutChart'
+            , data: {
+                message: ''
+            }
+        })
     }
 </script>

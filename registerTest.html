@@ -2,15 +2,14 @@
 <html>
 
 <head>
-    <title>VegiSmart | Login</title>
+    <title>Vegi Smart | Register</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
-    <!-- Stylesheets -->
+    <!-- Style Sheets-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <link href="style/login.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="style/mobile.css" />
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -21,15 +20,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-  </head>
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5"> </head>
 
 <body>
     <!-- Slideout menu -->
     <nav id="menu">
         <header>
             <ul class="menuVertical">
-                <div id="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
+                <div class="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
                 <div class="menuLinks">
                     <a href="index.html">
                         <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
@@ -72,13 +70,12 @@
     <!-- header -->
     <main id="panel">
         <header>
-            <!-- Top Navigation -->
             <div class="topNav">
                 <div class="menuButton">
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-user-o" aria-hidden="true"></i> Login</h1></div>
+                    <h1 id="navTitle"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</h1> </div>
                 <div class="menuRight">
                     <div id="sign-in-status"></div>
                     <button class="signOutButton" onclick="toggleSignIn()">
@@ -90,22 +87,142 @@
         <div class="container-fluid">
             <div class="container" id="container">
                 <div class="row">
-                    <div class="col-xs-12 colAdjust">
-                        <div class="formContent"><img src="images/Icon%20Assets/logo_ver3xhdpi.png" alt="Logo" id="logo">
+                    <div class="col-xs-12">
+                        <div class="formContent"> <img src="images/Icon%20Assets/logo_ver3xhdpi.png" alt="Logo" id="logo">
                             <div id="message"></div>
-                            <input type="text" id="username" class="textinput" name="Username" placeholder="Email" required>
+                            <input type="text" id="displayname" class="textinput" name="DisplayName" placeholder="Display Name" required>
+                            <br>
+                            <input type="email" id="username" class="textinput" name="Username" placeholder="Email" required>
                             <br>
                             <input type="password" id="password" class="textinput" name="Password" placeholder="Password" required>
                             <br>
-                            <input class="button" type="submit" value="Login" onclick="login()">
-                            <input class="button" type="button" value="Register" onclick="register()"> </div>
-                        <div id="firebaseui-auth-container"></div>
+                            <input type="password" id="passwordconfirm" class="textinput" name="PasswordConfirm" placeholder="Confirm Password" required>
+                            <br>
+                            <input class="button" type="button" value="Register" onclick="handleSignUp()"> </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 </body>
+<!--Firebase component-->
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y"
+        , authDomain: "vegismart-9265b.firebaseapp.com"
+        , databaseURL: "https://vegismart-9265b.firebaseio.com"
+        , projectId: "vegismart-9265b"
+        , storageBucket: "vegismart-9265b.appspot.com"
+        , messagingSenderId: "37856046364"
+    };
+    firebase.initializeApp(config);
+</script>
+<!-- firebaseUI for user authentication -->
+<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+    
+    
+<!-- Firebase Auth state track and display on each page-->
+<script type="text/javascript">
+    function toggleSignIn() {
+        if (firebase.auth().currentUser) {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        }
+        else {
+            window.location.replace("login.html");
+        }
+        document.getElementById('sign-in').disabled = true;
+    }
+
+    function initApp() {
+        // Listening for auth state changes.
+        // [START authstatelistener]
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                user.getToken().then(function (accessToken) {
+                    document.getElementById('sign-in-status').textContent = user.displayName;
+                    document.getElementById('sign-in').textContent = 'Sign out';
+                    document.getElementById('account-details').textContent = JSON.stringify({
+                        displayName: displayName
+                        , email: email
+                        , emailVerified: emailVerified
+                        , photoURL: photoURL
+                        , uid: uid
+                        , accessToken: accessToken
+                        , providerData: providerData
+                    }, null, '  ');
+                });
+            }
+            else {
+                // User is signed out.
+                document.getElementById('sign-in-status').textContent = 'Signed out';
+                document.getElementById('sign-in').textContent = 'Sign in';
+                document.getElementById('account-details').textContent = 'null';
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    }
+    window.onload = function () {
+        initApp();
+    };
+    /**
+     * Handles the sign up button press.
+     */
+    function handleSignUp() {
+        var email = $('#username').val();
+        var password = $('#password').val();
+        var displayname = $('#displayname').val();
+        var dbRefUsers = firebase.database().ref().child('users');
+        if (email.length < 4) {
+            alert('Please enter an email address.');
+            return;
+        }
+        if (password.length < 4) {
+            alert('Please enter a password.');
+            return;
+        }
+        
+        // [START createwithemail]
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // [START_EXCLUDE]
+            if (errorCode == 'auth/weak-password') {
+                alert('The password is too weak.');
+            }
+            else {
+                alert(errorMessage);
+            }
+            console.log(error);
+            // [END_EXCLUDE]
+        });
+        // [END createwithemail]
+        //realtime listner
+        firebase.auth().onAuthStateChanged(currentUser => {
+            if(currentUser) {
+                console.log(currentUser);
+                window.location.replace("index.html");
+
+            } else {
+            }
+        })
+    }
+</script>
+    
+    
+    
+    
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
 <!-- Tether -->
@@ -127,128 +244,13 @@
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
-    var element = document.getElementById('menuHeader'),
-    style = window.getComputedStyle(element),
-    size = style.getPropertyValue('width');
     var slideout = new Slideout({
         'panel': document.getElementById('panel')
         , 'menu': document.getElementById('menu')
-        , 'padding': size
+        , 'padding': 300
         , 'tolerance': 70
     });
     document.querySelector('.toggle-button').addEventListener('click', function () {
         slideout.toggle();
     });
-</script>
-
-    
-<!--Firebase component-->
-<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
-    authDomain: "vegismart-9265b.firebaseapp.com",
-    databaseURL: "https://vegismart-9265b.firebaseio.com",
-    projectId: "vegismart-9265b",
-    storageBucket: "vegismart-9265b.appspot.com",
-    messagingSenderId: "37856046364"
-  };
-  firebase.initializeApp(config);
-</script>
-<!-- firebaseUI for user authentication -->
-<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
-<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
-<script type="text/javascript">
-    function signOut() {
-        firebase.auth().signOut().then(function () {
-            // Sign-out successful.
-        }).catch(function (error) {
-            // An error happened.
-        });
-    };
-    $('document').ready(function () {
-        initApp();
-    });
-    // FirebaseUI config.
-    var uiConfig = {
-        signInSuccessUrl: 'index.html'
-        , signInOptions: [
-            // Leave the lines as is for the providers you want to offer your users.
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID
-            
-        , ]
-        , // Terms of service url.
-        tosUrl: '<your-tos-url>'
-    };
-    // Initialize the FirebaseUI Widget using Firebase.
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    // The start method will wait until the DOM is loaded.
-    ui.start('#firebaseui-auth-container', uiConfig);
-    initApp = function () {
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                // User is signed in.
-                var displayName = user.displayName;
-                var email = user.email;
-                var emailVerified = user.emailVerified;
-                var photoURL = user.photoURL;
-                var uid = user.uid;
-                var providerData = user.providerData;
-                user.getToken().then(function (accessToken) {
-                    document.getElementById('sign-in-status').textContent = user.displayName;
-                    document.getElementById('sign-in').textContent = 'Sign Out';
-                });
-                firebase.database().ref('users/' + uid).update({
-                    displayName: displayName
-                });
-                firebase.database().ref('users/' + uid).update({
-                    email: email
-                });
-            }
-            else {
-                // User is signed out.
-                document.getElementById('sign-in-status').textContent = 'Signed out';
-                document.getElementById('sign-in').textContent = 'Sign in';
-            }
-        }, function (error) {
-            console.log(error);
-        });
-    };
-    window.addEventListener('load', function () {
-        initApp()
-    });
-</script>
-
-<script>
-    function login() {
-        var email = $('#username').val();
-        var password = $('#password').val();
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            $('#message').html(errorMessage);
-        });
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                window.location.replace("index.html");
-            }
-        });
-    }
-
-    function toggleSignIn() {
-        if (firebase.auth().currentUser) {
-            // [START signout]
-            firebase.auth().signOut();
-            // [END signout]
-        }
-        else {
-            window.location.replace("login.html");
-        }
-        document.getElementById('sign-in').disabled = true;
-    }
-
-    function register() {
-        window.location.replace("register.html");
-    }
 </script>
