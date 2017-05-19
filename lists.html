@@ -21,7 +21,10 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-     </head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuefire/1.4.2/vuefire.min.js"></script>
+</head>
 
 <body>
     <!-- Slideout menu -->
@@ -86,40 +89,114 @@
                     <!--<div id="account-details"></div>--></div>
             </div>
         </header>
-        <div class="container" id="container">
-           <div class="myListContent">
-                <div id="center">
-                    <input type="text" v-on:keyup.enter="addList" v-model="newListText" id="addAnItem" class="addAList" placeholder="Add A List"> </div>
-                <div id="infoText">
-                    <template v-for="(list,index) in lists">
-                        <a :href="'#' + 'my'+ index" class="" data-toggle="collapse">
-                            <h3 id="info">
-               
-               {{list.name}}
-               <i id="carat" class="fa fa-caret-down" aria-hidden="true"></i>
-               </h3></a>
-                        <br>
-                        <div v-bind:id=" 'my' + index" class="collapse" v-bind:class="noCollapse(index)">
-                            <div id="center">
-                                <input type="text" v-on:keyup.enter="addItem(index)" v-model="newTodoText" id="addAnItem" placeholder="Add An Item"> </div>
-                            <div id="right"><a @click="removeList(index)" id="removeList" href="#"><i class="fa fa-times" aria-hidden="true"></i> Remove List</a></div>
-                            <div v-if="list.lunch.length > 0"> <a @click="checkAll(index)" href="#" id="selectAll"><i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All</a> </div>
-                            <template>
-                                <ul id="">
-                                    <li @click="checkIt(index, index2)" id="listItem" v-for="(item,index2) in list.lunch"> <i v-if="!item.checked" class="fa fa-square-o" aria-hidden="true"></i> <i v-else class="fa fa-check-square-o" aria-hidden="true"></i> <span v-if="item.checked"><s>
-                            <span v-if="item.quantity != 0">{{item.quantity}}</span> {{item.item}}</s>
-                                        </span> <span v-else> <span v-if="item.quantity != 0">{{item.quantity}}</span> {{item.item}}</span>
-                                    </li>
-                                </ul>
-                            </template>
-                            <div id="buttons">
-                                <button v-if="anyChecked(index)" type="button" class="btn btn-sm">Add To Fridge</button>
-                                <button v-if="anyChecked(index)" type="button" class="btn btn-sm" @click="remove(index)">Remove</button>
-                            </div>
-                        </div>
-                    </template>
+        <!--
+    <div id="container">
+        <div class="contentWrap">
+            <div id="center">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <input type="text" v-on:keyup.enter="addList" v-model="newListText" id="addAnItem" placeholder="Add A List"> </div>
+
+            <div id="infoText">
+
+
+
+
+
+                <template v-for="(list,index) in lists">
+
+       <a :href="'#' + 'my'+ index" class="" data-toggle="collapse"> <h3 id="info" >
+
+           {{list.name}}
+           <i id="carat" class="fa fa-caret-down" aria-hidden="true"></i>
+           </h3></a><br>
+
+
+          <div v-bind:id=" 'my' + index" class="collapse" v-bind:class="noCollapse(index)">
+
+
+
+
+              <div id="right" ><a @click="removeList(index)" id="removeList"href="#"><i class="fa fa-times" aria-hidden="true"></i> Remove List</a></div>
+
+
+          <div v-if="list.lunch.length > 0" >
+                <a @click="checkAll(index)" href="#" id="selectAll"><i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All</a>
             </div>
+
+          <template >
+
+
+           <ul id="">
+
+
+                <li @click="checkIt(index, index2)" id="listItem" v-for="(item,index2) in list.lunch">
+
+                     <i v-if="!item.checked" class="fa fa-square-o" aria-hidden="true"></i>
+                    <i v-else class="fa fa-check-square-o" aria-hidden="true"></i>
+
+
+                    <span v-if="item.checked"><s>
+                        <span v-if="item.quantity != 0">{{item.quantity}}</span>  {{item.item}}</s></span>
+
+                    <span v-else> <span v-if="item.quantity != 0">{{item.quantity}}</span> {{item.item}}</span>
+
+                </li>
+            </ul>
+
+
+
+
+
+
+
+
+          </template>
+                <div id="buttons">
+                    <button v-if="anyChecked(index)" type="button" class="btn btn-sm">Add To Fridge</button>
+                    <button v-if="anyChecked(index)" type="button" class="btn btn-sm" @click="remove(index)">Remove</button>
+
+
+                </div>
             </div>
+            </template>
+        </div>
+    </div>
+    </div>
+-->
+        <div id="container">
+            <!--
+        <div id="center">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <input type="text" id="addAnItem" placeholder="Add A List" v-model.trim="newListName" @keyup.enter="addList"> </div>
+-->
+            <div id="center">
+                <h3 id="info">Fruits
+            </h3>
+                <input id="addAnItem" placeholder="Add An Item" v-model.trim="newTodoTextF" @keyup.enter="addTodoF()" placeholder="Add new todo">
+            </div>
+            <ul>
+                <template v-for="todo in fruits">
+                    <li @click="checkIt(todo, fruitsRef)" id="listItem"> <i v-if="!todo.checked" class="fa fa-square-o" aria-hidden="true"></i> <i v-else class="fa fa-check-square-o" aria-hidden="true"></i> {{todo['.key']}} </li>
+                </template>
+                <div id="buttons">
+                    <button v-if="anyChecked(fruitsRef)" type="button" class="btn btn-sm">Add To Fridge</button>
+                    <button v-if="anyChecked(fruitsRef)" type="button" class="btn btn-sm" @click="removeChecked(fruits, fruitsRef)">Remove</button>
+                </div>
+            </ul>
+            <!--             END FRUITS-->
+            <div id="center">
+                <h3 id="info">Vegetables
+            </h3>
+                <input id="addAnItem" placeholder="Add An Item" v-model.trim="newTodoTextV" @keyup.enter="addTodoV()" placeholder="Add new todo"> </div>
+            <ul>
+                <template v-for="todo in vegs">
+                    <li @click="checkIt(todo, vegRef)" id="listItem"> <i v-if="!todo.checked" class="fa fa-square-o" aria-hidden="true"></i> <i v-else class="fa fa-check-square-o" aria-hidden="true"></i> {{todo['.key']}} </li>
+                </template>
+                <div id="buttons">
+                    <button v-if="anyChecked(vegRef)" type="button" class="btn btn-sm">Add To Fridge</button>
+                    <button v-if="anyChecked(vegRef)" type="button" class="btn btn-sm" @click="removeChecked(vegs, vegRef)">Remove</button>
+                </div>
+            </ul>
         </div>
     </main>
 </body>
@@ -131,7 +208,6 @@
 <!-- Bootstrap 4 Alpha JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
 <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
-<script src="vue.js"></script>
 <!-- Initialize Bootstrap functionality -->
 <script>
     // Initialize tooltip component
@@ -143,134 +219,7 @@
         $('[data-toggle="popover"]').popover()
     })
 </script>
-<script type="text/javascript">
-    new Vue({
-        el: '#container'
-        , data: {
-            newTodoText0: ''
-            , newListText: ''
-            , /**
-             * Users Lists
-             */
-            lists: [{
-                    name: "Shopping List"
-                    , lunch: [{
-                        quantity: 4
-                        , item: "Apples"
-                        , checked: false
-                    }]
-                }
-                , {
-                    name: "Vegetables"
-                    , lunch: [{
-                        quantity: 1
-                        , item: "Bacons"
-                        , checked: false
-                    }]
-                }
-            ]
-        , }
-        , methods: {
-            /**
-             * Checks that is clicked
-             * @param index
-             * @param index2
-             */
-            checkIt: function (index, index2) {
-                this.lists[index].lunch[index2].checked = !this.lists[index].lunch[index2].checked;
-            }
-            , /**
-             * Don't collapse the first list
-             * @param i
-             * @returns {*}
-             */
-            noCollapse: function (i) {
-                if (i == 0) return "in";
-                else return '';
-            }
-            , /**
-             * Add an item to the current list
-             * @param index
-             */
-            addItem: function (index) {
-                var obj = {
-                    quantity: 0
-                    , item: this.newTodoText
-                    , checked: false
-                }
-                this.lists[index].lunch.push(obj)
-                this.newTodoText = '';
-            }
-            , /**
-             * Create and add a new list with empty items
-             */
-            addList: function () {
-                var obj = {
-                    name: this.newListText
-                    , lunch: []
-                }
-                this.lists.push(obj);
-                this.newListText = '';
-            }
-            , /**
-             * Checks if any items in the current list has been selected
-             * @param index
-             * @returns {boolean}
-             */
-            anyChecked: function (index) {
-                var vm = this;
-                for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                    if (vm.lists[index].lunch[i].checked) return true;
-                }
-            }
-            , /**
-             * Checks if all the items in the current list are selected
-             * @param index
-             * @returns {boolean}
-             */
-            allChecked: function (index) {
-                var vm = this;
-                for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                    if (!vm.lists[index].lunch[i].checked) return false;
-                }
-                return true;
-            }
-            , checkAll: function (index) {
-                var vm = this;
-                if (this.allChecked(index)) {
-                    for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                        vm.lists[index].lunch[i].checked = false;
-                    }
-                }
-                else {
-                    for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                        vm.lists[index].lunch[i].checked = true;
-                    }
-                }
-            }
-            , //TODO
-            addToFridge: function () {}
-            , /**
-             * Remove the selected list
-             * @param index
-             */
-            removeList: function (index) {
-                var vm = this;
-                vm.lists.splice(index, 1);
-            }
-            , remove: function (index) {
-                var vm = this;
-                for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                    if (vm.lists[index].lunch[i].checked) {
-                        vm.lists[index].lunch.splice(i, 1)
-                        i--
-                    }
-                }
-            }
-        }
-    });
-</script>
- <!-- slideout menu component -->
+    <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
     var element = document.getElementById('menuHeader'),
@@ -286,6 +235,7 @@
         slideout.toggle();
     });
 </script>
+    
 <!--Firebase component-->
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script>
@@ -300,11 +250,12 @@
     };
     firebase.initializeApp(config);
 </script>
-<!-- firebaseUI for user authentication -->
-<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
-<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
-<!-- Firebase Auth state track and display on each page-->
-<script type="text/javascript">
+<script>
+    var fruitsRef;
+    var listsRef;
+    var vegRef;
+    var uid;
+
     function toggleSignIn() {
         if (firebase.auth().currentUser) {
             // [START signout]
@@ -329,33 +280,213 @@
                 firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
                     var displayName = snapshot.val();
                     var email = user.email;
-                    uid = user.uid;
+                    var uid = user.uid;
                     var providerData = user.providerData;
+                    var emailVerified = user.emailVerified;
+                    var photoURL = user.photoURL;
                     user.getToken().then(function (accessToken) {
                         document.getElementById('sign-in-status').textContent = user.displayName;
                         document.getElementById('sign-in').textContent = 'Sign out';
                         $('#sign-in-status').text(displayName);
                     });
-                    firebase.database().ref('users/' + uid + '/stats/consumed').once('value').then(function (snapshot) {
-                        consumed = snapshot.val();
-                        initCharts();
-                        beginReadStats();
-                    });
+                    fruitsRef = firebase.database().ref('users/' + uid + '/Lists/Fruits');
+                    listsRef = firebase.database().ref('users/' + uid + '/Lists');
+                    vegRef = firebase.database().ref('users/' + uid + '/Lists/Vegetables');
+                    createVue();
                 });
             }
             else {
                 // User is signed out.
                 document.getElementById('sign-in-status').textContent = 'Signed out';
                 document.getElementById('sign-in').textContent = 'Sign in';
+                createVueOffline();
             }
         }, function (error) {
             console.log(error);
         });
     }
 
-    function beginReadStats() {
-        firebase.database().ref('users/' + uid + '/stats/consumed').on('value', function (snapshot) {
-            consumed = snapshot.val();
+    function createVue() {
+        new Vue({
+            el: '#container'
+            , data: {
+                newTodoTextF: ''
+                , newTodoTextV: ''
+                , newListName: ''
+                , listName: fruitsRef.getKey()
+                , todo: 'a'
+            }
+            , firebase: {
+                fruits: fruitsRef.limitToLast(25)
+                , lists: listsRef.limitToLast(25)
+                , vegs: vegRef.limitToLast(25)
+            }
+            , methods: {
+                addTodoF: function () {
+                    if (this.newTodoTextF) {
+                        firebase.database().ref('users/' + uid + '/Lists/Fruits/' + this.newTodoTextF).update({
+                            checked: false
+                        })
+                        this.newTodoTextF = ''
+                    }
+                }
+                , addTodoV: function () {
+                    if (this.newTodoTextV) {
+                        firebase.database().ref('users/' + uid + '/Lists/Vegetables/' + this.newTodoTextV).update({
+                            checked: false
+                        })
+                        this.newTodoTextV = ''
+                    }
+                }
+                , addList: function () {
+                    if (this.newListName) {
+                        listsRef.update({
+                            name: this.newListName
+                        })
+                        this.newListName = ''
+                    }
+                }
+                , removeTodo: function (todo, ref) {
+                    ref.child(todo['.key']).remove()
+                }
+                , checkIt: function (todo, ref) {
+                    ref.once("value", function (snapshot) {
+                        var i = snapshot.child(todo['.key']).child('checked').val();
+                        if (i) ref.child(todo['.key']).child('checked').set(false)
+                        else ref.child(todo['.key']).child('checked').set(true)
+                    });
+                }
+                , anyChecked: function (ref) {
+                    return true;
+                }
+                , removeChecked: function (items, ref) {
+                    for (i = 0; i < items.length; i++) {
+                        if (items[i].checked) {
+                            var v = items[i]
+                            ref.child(v['.key']).remove()
+                            i--
+                        }
+                    }
+                }
+                , updateTodoText: function (todo, newText) {
+                    todosRef.child(todo['.key']).child('text').set(newText)
+                }
+                , //TODO
+                addToFridge: function () {}
+            }
         });
     }
+    //This vue object is used for offline storage
+    /*
+     function createVueOffline(){
+     var vueOffline = new Vue({
+     el: '#container',
+     data: {
+     newTodoTextF: '',
+     newTodoTextV: '',
+     newListName: '',
+     //listName: fruitsRef.getKey()
+
+
+     },
+
+     firebase: {
+     fruits: fruitsRef.limitToLast(25),
+     lists: listsRef.limitToLast(25),
+     vegs: vegRef.limitToLast(25)
+
+
+
+     },
+     methods: {
+     addTodoF: function() {
+
+     if (this.newTodoTextF) {
+     fruitsRef.update({
+     text: this.newTodoTextF,
+     checked: false
+     })
+     this.newTodoTextF = ''
+     }
+     },
+     addTodoV: function() {
+
+
+
+     if (this.newTodoTextV) {
+     vegRef.update({
+     text: this.newTodoTextV,
+     checked: false
+     })
+     this.newTodoTextV = ''
+     }
+     },
+     addList: function() {
+     if (this.newListName) {
+     listsRef.update({
+     name: this.newListName
+     })
+     this.newListName = ''
+     }
+
+
+     },
+     removeTodo: function(todo, ref) {
+     ref.child(todo['.key']).remove()
+     },
+
+     checkIt: function(todo, ref) {
+
+
+     ref.once("value", function(snapshot) {
+
+
+     var i = snapshot.child(todo['.key']).child('checked').val();
+     if (i) ref.child(todo['.key']).child('checked').set(false)
+     else
+     ref.child(todo['.key']).child('checked').set(true)
+
+
+     }
+
+     );
+
+
+
+     },
+     anyChecked: function(ref) {
+     return true;
+
+     },
+     removeChecked: function(items, ref) {
+
+
+
+     for (i = 0; i < items.length; i++) {
+
+     if (items[i].checked) {
+     var v = items[i]
+     ref.child(v['.key']).remove()
+     i--
+     }
+     }
+
+
+
+
+     },
+
+
+     updateTodoText: function(todo, newText) {
+     todosRef.child(todo['.key']).child('text').set(newText)
+     },
+
+     //TODO
+     addToFridge: function() {
+
+     }
+     }
+     });
+     }
+     */
 </script>

@@ -2,16 +2,14 @@
     background-color: #00b74f;
     color:white;
     list-style-type: none;
-    margin:1px;
     width:100%;
     font-size:140%;
-    padding-left:20px;
-    min-width:175px;
-
+    padding-left:10%;
+    margin-bottom:
 }
 #fridgeList{
     padding:0px;
-
+  margin: 0 auto;
 }
 #quantityManager{
     background-color: white;
@@ -25,63 +23,120 @@
 #quantityManagerContent{
     color:black;
     text-align:center;
+    width:100%;
+    margin-top:10px;
 }
 
 #selected{
     background-color: #197F53;
     color:white;
-
-}
-
-.center{
-    text-align:center;
+    width:100%;
 }
 
 .no_bottom{
     margin-bottom: 0px;
+    width:100%;
+    padding-left: 0px !important;
 }
 
 #addvegbutton{
-    width:30%;
-
-    min-width:185px;
+    width:90%;
+    white-space: normal;
+   
 }
 #largebutton{
-    min-width:230px;
-    width:25%;
-
+    
+    width:100% !important;
+    white-space: normal;
+    
 }
-
-#quantityManager{
-    text-align: center;
-    min-width:230px;
-
-
-}
-
 
 #trashbutton{
-    min-width:200px;
-}
-#fridgeList{
-    padding-left:0px;
-
+    min-width:100%;
+    white-space: normal;
 }
 
 #fridgeContent{
-    position:relative;
-    left:30px;
-    top:-10px;
+    width:100%;
+    
 }
 #largeSelector{
-    padding-right:7%;
 }
 #buttonrow{
-    display:inline-block;
-    align-content: right;
-    margin-bottom:20px;
+    width:100%;
+    margin: 0 auto;
+    padding:0;
 }
 .myFridgeContent {
     padding:30px 0;
-        
+    width:100%;
+ margin: 0 auto;
+}
+.center {
+    text-align:center;
+    
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+#fridgeHeaderIcon {
+    margin-bottom: 5px;
+    padding: 2px;
 }
