@@ -1,7 +1,7 @@
 <?php
 require_once 'firebaseLib.php';
 // --- This is your Firebase URL
-$url = 'https://www.gstatic.com/firebasejs/4.4.0/firebase.js';
+$url = 'https://plant-monitor-9e424.firebaseio.com/';
 // --- Use your token from Firebase here
 $token = 'cgsxyH1YNAc6TPhqeEuHqdzDOjPWr7MbE3R1RKP9';
 // --- Here is your parameter from the http GET
