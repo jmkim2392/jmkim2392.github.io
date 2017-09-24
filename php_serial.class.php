@@ -106,7 +106,7 @@ class phpSerial
             {
                 if (preg_match("@^COM(\d+):?$@i", $device, $matches))
                 {
-                    $device = "/dev/ttyS" . ($matches[1] - 1);
+                    $device = "/dev/ttyACM0" . ($matches[1] - 1);
                 }
 
                 if ($this->_exec("stty -F " . $device) === 0)
@@ -531,23 +531,8 @@ class phpSerial
             {
             // Behavior in OSX isn't to wait for new data to recover, but just grabs what's there!
             // Doesn't always work perfectly for me in OSX
-            $content = ""; $i = 0;
-
-            if ($count !== 0)
-            {
-                do {
-                    if ($i > $count) $content .= fread($this->_dHandle, ($count - $i));
-                    else $content .= fread($this->_dHandle, 128);
-                } while (($i += 128) === strlen($content));
-            }
-            else
-            {
-                do {
-                    $content .= fread($this->_dHandle, 128);
-                } while (($i += 128) === strlen($content));
-            }
-
-            return $content;
+            $content .=fread($this->_dHanel, $count);
+            return str_split($content);
         }
         elseif ($this->_os === "windows")
         {
